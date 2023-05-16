@@ -1,0 +1,56 @@
+
+body {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #333;
+}
+
+h1 {
+  color: #555;
+}
+
+#chat-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#chat-log {
+  margin-bottom: 10px;
+}
+
+
+#chat-log p {
+  margin: 5px 0;
+}
+
+#question-input {
+  width: 80%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button[type="submit"] {
+  padding: 5px 10px;
+  background-color: #555;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #333;
+}
+
+strong {
+  font-weight: bold;
+  color: #333;
+}
+
+strong:first-child {
+  color: #555;
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <title>Chatbot</title>
+</head>
+
+<body>
+    <h1>Chatbot</h1>
+    <div id="chat-container">
+        <div id="chat-log"></div>
+        <form id="chat-form" action="/chat" method="post">
+            <input type="text" name="question" id="question-input" placeholder="Nh?p câu h?i c?a b?n">
+            <button type="submit">G?i</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById("chat-form").addEventListener("submit", function (event) {
+            event.preventDefault();
+            var questionInput = document.getElementById("question-input");
+            var chatLog = document.getElementById("chat-log");
+
+            // Hi?n th? câu h?i c?a ngu?i dùng trong chat log
+            var userQuestion = questionInput.value;
+            chatLog.innerHTML += "<p><strong>B?n:</strong> " + userQuestion + "</p>";
+
+            // G?i yêu c?u chat qua Ajax
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/chat", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    var botAnswer = response.answer;
+
+                    // Hi?n th? câu tr? l?i c?a chatbot trong chat log
+                    chatLog.innerHTML += "<p><strong>Chatbot:</strong> " + botAnswer + "</p>";
+
+                    // Xóa n?i dung c?a input
+                    questionInput.value = "";
+                }
+            };
+            xhr.send("question=" + encodeURIComponent(userQuestion));
+        });
+    </script>
